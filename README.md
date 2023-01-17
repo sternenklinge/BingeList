@@ -1,5 +1,5 @@
 # BingeList
-**an web application to organize your watch list**
+**a web application to organize your watch list**
 
 # Installation
 ## Dependencies
@@ -9,5 +9,4 @@
 
 # How to run Server
 1. `cd BingeList` 
-2. `python manage.py runsever` 
-deafult address is `http://127.0.0.1:8000/`
+2. `python manage.py runsever` deafult address is `http://127.0.0.1:8000/`
