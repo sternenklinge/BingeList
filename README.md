@@ -1,7 +1,6 @@
 # BingeList
 **a web application to organize your watch list**
 
-# Installation
 ## Dependencies
 - Python und pip
 - [Django](https://djangoproject.com)
