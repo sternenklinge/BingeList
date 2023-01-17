@@ -8,9 +8,5 @@
 - requirements.txt
 
 # How to run Server
-1. 
-`cd BingeList` 
-2. 
-`python manage.py runsever` 
-deafult address is 
-`http://127.0.0.1:8000/`
+1. `cd BingeList` 
+2. `python manage.py runsever` deafult address is `http://127.0.0.1:8000/`
