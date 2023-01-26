@@ -19,8 +19,9 @@ class Episode(models.Model):
     name = models.CharField(max_length=255)
 
 class Watchlist(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    media = models.ForeignKey(Media, on_delete=models.CASCADE)
-    status = models.CharField(max_length=255, choices=[("planed", "planed"), ("watching", "watching"), ("abandoned", "abandoned"), ("completed", "completed")])
-    current_season = models.IntegerField(null=True, blank=True)
-    current_episode = models.IntegerField(null=True, blank=True)
+    tmdb_id = models.IntegerField()
+    title = models.CharField(max_length=255)
+    release_date = models.DateField()
+    overview = models.TextField()
+    poster_path = models.CharField(max_length=255)
+    # status = models.CharField(max_length=255, choices=[("planed", "planed"), ("watching", "watching"), ("abandoned", "abandoned"), ("completed", "completed")])
