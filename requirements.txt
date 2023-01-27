@@ -1,1 +1,2 @@
- tmdbsimple
+Django==3.2.16
+tmdbsimple==2.9.1
