@@ -2,9 +2,10 @@
 **a web application to organize your watch list**
 
 ## Dependencies
-- Python und pip
-- [Django](https://djangoproject.com)
-- requirements.txt
+- Python and pip
+- [Django](https://djangoproject.com) as backend
+- tmdbsimple for the api requests
+- to install all dependencies just type `pip install -r requirements.txt`
 
 # How to run the Server
 1. `cd BingeList` 
