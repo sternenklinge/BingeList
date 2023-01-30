@@ -3,6 +3,11 @@
 
 <h1>BingeList</h1>
 <a href="{% url 'search' %}">Search</a>
+<a href="{% url 'discover' %}">Discover</a>
+<form action="{% url 'search_results' %}" method="get">
+  <input type="text" name="query" placeholder="Suche nach Film oder Serie...">
+  <button type="submit">Suchen</button>
+</form>
 
 </body>
 </html>

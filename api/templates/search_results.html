@@ -6,7 +6,6 @@
       float: left;
       width: 50%;
     }
-
     /* Clearfix für die beiden Spalten */
     .row::after {
       content: "";
@@ -16,6 +15,8 @@
   </style>
 </head>
 <body>
+
+<a href="{% url 'home' %}">Home</a>
   <h1>Suche</h1>
 
   <form action="{% url 'search_results' %}" method="get">

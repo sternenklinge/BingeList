@@ -18,7 +18,6 @@ def search_movies_and_tv(query):
     tv_shows = search.results
     return movies, tv_shows
 
-
 movies, tv_shows = search_movies_and_t("Harry Potter Stein der Weisen")
 print(movies)
 print(tv_shows)
