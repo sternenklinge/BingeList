@@ -1,0 +1,29 @@
+<html>
+<body>
+
+<h1>Watchlist</h1>
+<a href="{% url 'home' %}">Home</a>
+{% if movies %}
+    <div class="row">
+      {% for movie in movies %}
+        <div class="column">
+          <h3>Titel: {{ movie.title }}</h3>
+          <p>Release Date: {{movie.release_date}}</p>
+          <p>Genres:
+          {% if movie.genres %}
+              {% for genre in movie.genres %}
+                  {{ genre.name }}
+              {% endfor %}
+          {% endif %}
+          </p>
+          <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
+          <p>Inhalt: {{movie.overview}}</p>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <h3>Die Watchlist ist leer.</h3>
+  {% endif %}
+</body>
+</html>
+
