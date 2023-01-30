@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, HttpResponse
 import tmdbsimple as tmdb
+from .models import Watchlist
 
 tmdb.API_KEY = '300659883e7e07b8afd0aec7dbf8e802'
 tmdb.REQUESTS_TIMEOUT = 10
@@ -27,14 +28,17 @@ def discover(request):
     tv_shows = discover.results
     return render(request, 'discover.html', {'movies': movies, 'tv_shows': tv_shows})
 
-def add_to_watchlist(request, movie_id):
-    movie = tmdb.Movies(movie_id)
-    movie_info = movie.info()
-    watchlist_movie = Watchlist(
-        title=movie_info['title'],
-        release_date=movie_info['release_date'],
-        overview=movie_info['overview'],
-        poster_path=movie_info['poster_path'],
-        )
-    watchlist_movie.save()
-    return redirect('watchlist.html')
+def add_to_watchlist(request, id):
+    movie = tmdb.Movies(id)
+    response = movie.info()
+    Watchlist.objects.create(movie_id=id)
+    return HttpResponse("Der Film wurde erfolgreich zur Watchlist hinzugefügt.")
+
+def watchlist(request):
+    watchlist = Watchlist.objects.all()
+    movies = []
+    for item in watchlist:
+        movie = tmdb.Movies(item.movie_id)
+        response = movie.info()
+        movies.append(movie)
+    return render(request, 'watchlist.html', {'movies': movies})
