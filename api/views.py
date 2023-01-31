@@ -42,3 +42,7 @@ def watchlist(request):
         response = movie.info()
         movies.append(movie)
     return render(request, 'watchlist.html', {'movies': movies})
+
+def delete_watchlist(request):
+    watchlist = Watchlist.objects.all().delete()
+    return HttpResponse('Alle Elemente aus der watchlist wurden entfernt')
