@@ -46,3 +46,6 @@ def watchlist(request):
 def delete_watchlist(request):
     watchlist = Watchlist.objects.all().delete()
     return HttpResponse('Alle Elemente aus der watchlist wurden entfernt')
+
+def index(request):
+    return render(request, 'index.html')
