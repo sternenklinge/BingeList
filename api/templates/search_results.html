@@ -42,7 +42,8 @@
           </p>
           <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
           <p>Inhalt: {{movie.overview}}</p>
-          <a href="{% url 'add_to_watchlist' movie.id %}">Zur Watchlist hinzufügen</a>
+          <button data-add-button class="add-button" >Zur Watchlist hinzufügen</button>
+          <!--<a href="{% url 'add_to_watchlist' movie.id %}">Zur Watchlist hinzufügen</a>-->
         {% endfor %}
       </div>
       <div class="column">
