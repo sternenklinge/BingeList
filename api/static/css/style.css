@@ -101,6 +101,7 @@
   padding: 10px 15px;
   border-radius: 5px;
   box-shadow: 10px 10px 30px rgba(0, 0, 0, .1);
+  cursor: pointer;
 }
 .container .tile .coverart{
   padding: 10px;
