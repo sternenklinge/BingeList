@@ -128,10 +128,26 @@
   font-weight: bold;
 }
 .modal-body .coverart {
-  position: inherit;
+  padding: 10px 5px;
 }
-.modal-body .text {
+.modal-body .overview {
   padding: 10px 15px;
+}
+.modal-footer {
+  padding: 10px 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top:  1px solid black;
+}
+.modal-footer .add-button {
+  cursor: pointer;
+  border: 0.8px solid black;
+  border-radius: 5px;
+  outline: none;
+  background-color: #14A9FF;
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 #overlay {
   position: fixed;
