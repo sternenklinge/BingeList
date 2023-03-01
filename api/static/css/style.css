@@ -92,6 +92,23 @@
   text-transform: none;
   text-decoration: none;
 }
+.container {
+  padding: 3em;
+  display: grid;
+  grid-gap: 2em;
+}
+.container .tile {
+  padding: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, .1);
+}
+.container .tile .coverart{
+  padding: 10px;
+}
+.container .tile .title{
+  font-size: 1.25rem;
+  font-weight: bold;
+}
 .modal {
   position: fixed;
   top: 50%;

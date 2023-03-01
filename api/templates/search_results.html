@@ -26,11 +26,57 @@
 
   <h2>Gefundene Ergebnisse</h2>
 
+  <div class="container">
+    {% for movie in movies %}
+    <div class="tile" id="%movie.id%">
+      <div class="coverart">
+        <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
+      </div>
+      <div class="title">{{ movie.title }}</div>
+    </div>
+  {% endfor %}
+  </div>
+
+  <div id="overlay"></div>
+
+  {% for movie in movies %}
+    <div class="modal" id="%movie.id%">
+      <div class="modal-header">
+        <div class="title">{{ movie.title }}</div>
+        <button class="close-button">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="coverart">
+          <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
+        </div>
+        <div class="overview">
+          {{movie.overview}}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="date">
+          Release Date: {{movie.release_date}}
+        </div>
+        <div class="genres">
+          Genres:
+          {% if movie.genres %}
+              {% for genre in movie.genres %}
+                  {{ genre.name }}
+              {% endfor %}
+          {% endif %}
+        </div>
+        <button class="add-button" id="%movie.id%">Add to Watchlist</button>
+      </div>
+    </div>
+  {% endfor %}
+
   {% if movies or tv_shows %}
     <div class="row">
       <div class="column">
+        <div class="modal" id="%movie.id%">
         <h3>Filme</h3>
         {% for movie in movies %}
+          <div class="tile">
           <h4>Titel: {{ movie.title }}</h4>
           <p>Release Date: {{movie.release_date}}</p>
           <p>Genres:
@@ -42,9 +88,11 @@
           </p>
           <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
           <p>Inhalt: {{movie.overview}}</p>
-          <button data-add-button class="add-button" >Zur Watchlist hinzufügen</button>
+          <button data-add-button class="add-button" id="% movie.id %">Zur Watchlist hinzufügen</button>
           <!--<a href="{% url 'add_to_watchlist' movie.id %}">Zur Watchlist hinzufügen</a>-->
+          </div>>
         {% endfor %}
+        </div>
       </div>
       <div class="column">
         <h3>TV-Shows</h3>
