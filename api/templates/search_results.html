@@ -1,6 +1,6 @@
 <html>
 <head>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="results_style.css">
 </head>
 <body>
 
@@ -20,20 +20,20 @@
   {% if movies or tv_shows %}
     <div class="container">
       {% for movie in movies %}
-      <div class="tile" id="%movie.id%">
+      <button data-modal-target="#%movie.id%" class="tile">
         <div class="coverart">
           <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
         </div>
         <div class="title">{{ movie.title }}</div>
-      </div>
+      </button>
       {% endfor %}
       {% for tv_show in tv_shows %}
-      <div class="tile" id="%tv_show.id%">
+      <button data-modal-target="#%tv_show.id%" class="tile">
         <div class="coverart">
           <img src="https://image.tmdb.org/t/p/w500/{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
         </div>
         <div class="title">{{ tv_show.title }}</div>
-      </div>
+      </button>
       {% endfor %}
     </div>
 
@@ -65,7 +65,7 @@
                 {% endfor %}
             {% endif %}
           </div>
-          <button data-add-target="#%movie.id%" class="add-button" id="%movie.id%">Add to Watchlist</button>
+          <button data-add-target="#%movie.id%" class="add-button">Add to Watchlist</button>
         </div>
       </div>
     {% endfor %}
@@ -95,7 +95,7 @@
                 {% endfor %}
             {% endif %}
           </div>
-          <button data-add-target="#%tv_show.id%" class="add-button" id="%tv_show.id%">Add to Watchlist</button>
+          <button data-add-target="#%tv_show.id%" class="add-button">Add to Watchlist</button>
         </div>
       </div>
   {% endfor %}
