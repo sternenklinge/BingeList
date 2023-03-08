@@ -1,20 +1,9 @@
 <html>
 <head>
-  <style>
-    /* Style für die beiden Spalten */
-    .column {
-      float: left;
-      width: 50%;
-    }
-    /* Clearfix für die beiden Spalten */
-    .row::after {
-      content: "";
-      clear: both;
-      display: table;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 
 <a href="{% url 'home' %}">Home</a>
   <h1>Suche</h1>
@@ -26,90 +15,90 @@
 
   <h2>Gefundene Ergebnisse</h2>
 
-  <div class="container">
-    {% for movie in movies %}
-    <div class="tile" id="%movie.id%">
-      <div class="coverart">
-        <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
-      </div>
-      <div class="title">{{ movie.title }}</div>
-    </div>
-  {% endfor %}
-  </div>
+  
 
-  <div id="overlay"></div>
-
-  {% for movie in movies %}
-    <div class="modal" id="%movie.id%">
-      <div class="modal-header">
-        <div class="title">{{ movie.title }}</div>
-        <button class="close-button">&times;</button>
-      </div>
-      <div class="modal-body">
+  {% if movies or tv_shows %}
+    <div class="container">
+      {% for movie in movies %}
+      <div class="tile" id="%movie.id%">
         <div class="coverart">
           <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
         </div>
-        <div class="overview">
-          {{movie.overview}}
-        </div>
+        <div class="title">{{ movie.title }}</div>
       </div>
-      <div class="modal-footer">
-        <div class="date">
-          Release Date: {{movie.release_date}}
+      {% endfor %}
+      {% for tv_show in tv_shows %}
+      <div class="tile" id="%tv_show.id%">
+        <div class="coverart">
+          <img src="https://image.tmdb.org/t/p/w500/{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
         </div>
-        <div class="genres">
-          Genres:
-          {% if movie.genres %}
-              {% for genre in movie.genres %}
-                  {{ genre.name }}
-              {% endfor %}
-          {% endif %}
-        </div>
-        <button class="add-button" id="%movie.id%">Add to Watchlist</button>
+        <div class="title">{{ tv_show.title }}</div>
       </div>
+      {% endfor %}
     </div>
-  {% endfor %}
 
-  {% if movies or tv_shows %}
-    <div class="row">
-      <div class="column">
-        <div class="modal" id="%movie.id%">
-        <h3>Filme</h3>
-        {% for movie in movies %}
-          <div class="tile">
-          <h4>Titel: {{ movie.title }}</h4>
-          <p>Release Date: {{movie.release_date}}</p>
-          <p>Genres:
-          {% if movie.genres %}
-              {% for genre in movie.genres %}
-                  {{ genre.name }}
-              {% endfor %}
-          {% endif %}
-          </p>
-          <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
-          <p>Inhalt: {{movie.overview}}</p>
-          <button data-add-button class="add-button" id="% movie.id %">Zur Watchlist hinzufügen</button>
-          <!--<a href="{% url 'add_to_watchlist' movie.id %}">Zur Watchlist hinzufügen</a>-->
-          </div>>
-        {% endfor %}
+    <div id="overlay"></div>
+
+    {% for movie in movies %}
+      <div class="modal" id="%movie.id%">
+        <div class="modal-header">
+          <div class="title">{{ movie.title }}</div>
+          <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="coverart">
+            <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
+          </div>
+          <div class="overview">
+            {{movie.overview}}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="date">
+            Release Date: {{movie.release_date}}
+          </div>
+          <div class="genres">
+            Genres:
+            {% if movie.genres %}
+                {% for genre in movie.genres %}
+                    {{ genre.name }}
+                {% endfor %}
+            {% endif %}
+          </div>
+          <button data-add-target="#%movie.id%" class="add-button" id="%movie.id%">Add to Watchlist</button>
         </div>
       </div>
-      <div class="column">
-        <h3>TV-Shows</h3>
-        {% for tv_show in tv_shows %}
-          <h4>Titel: {{ tv_show.name }}</h4>
-          <p>Release Date: {{movie.release_date}}</p>
-          <p>Genres:
-          {% for genre in tv_show.genres %}
-              {{ genre.name }}
-          {% endfor %}
-          </p>
-          <img src="https://image.tmdb.org/t/p/w500/{{ tv_show.poster_path }}" alt="{{ tv_show.name }}">
-          <p>Inhalt: {{tv_show.overview}}</p>
-          
-        {% endfor %}
+    {% endfor %}
+    {% for tv_show in tv_shows %}
+      <div class="modal" id="%tv_show.id%">
+        <div class="modal-header">
+          <div class="title">{{ tv_show.title }}</div>
+          <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="coverart">
+            <img src="https://image.tmdb.org/t/p/w500/{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
+          </div>
+          <div class="overview">
+            {{tv_show.overview}}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="date">
+            Release Date: {{tv_show.release_date}}
+          </div>
+          <div class="genres">
+            Genres:
+            {% if tv_show.genres %}
+                {% for genre in tv_show.genres %}
+                    {{ genre.name }}
+                {% endfor %}
+            {% endif %}
+          </div>
+          <button data-add-target="#%tv_show.id%" class="add-button" id="%tv_show.id%">Add to Watchlist</button>
+        </div>
       </div>
-    </div>
+  {% endfor %}
   {% else %}
     <h3>Keine Ergebnisse gefunden.</h3>
   {% endif %}

@@ -82,7 +82,7 @@
   font-weight: 700;
   line-height: 1.15;
   text-transform: none;
-  text-decoration: none;
+  text-decnoration: none;
 }
 .Content {
   font-size: 16px;
@@ -96,8 +96,10 @@
   padding: 3em;
   display: grid;
   grid-gap: 2em;
+  grid-template-columns: repeat(auto-fit);
 }
 .container .tile {
+  width: 200px;
   padding: 10px 15px;
   border-radius: 5px;
   box-shadow: 10px 10px 30px rgba(0, 0, 0, .1);
