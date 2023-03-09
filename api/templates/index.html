@@ -42,84 +42,58 @@
   </head>
   <body>
     <div>
-      <link href="{% static 'css/binge-list-browse.css' %}" rel="stylesheet" />
+      <link href="{% static 'css/home.css' %}" rel="stylesheet" />
 
-      <div class="binge-list-browse-container">
-        <div class="binge-list-browse-binge-list-browse">
-          <img
-            alt="Rectangle11153"
-            src="public/playground_assets/rectangle11153-gp4h-300w.png"
-            class="binge-list-browse-rectangle1"
-          />
-          <img
-            alt="InterfaceHeart011154"
-            src="public/playground_assets/interfaceheart011154-0qn.svg"
-            class="binge-list-browse-interface-heart01"
-          />
-          <img
-            alt="NavigationCompass1155"
-            src="public/playground_assets/navigationcompass1155-562l.svg"
-            class="binge-list-browse-navigation-compass"
-          />
-          <span class="binge-list-browse-text"><span>Browse</span></span>
-          <span class="binge-list-browse-text02"><span>Watchlist</span></span>
-          <div class="binge-list-browse-n-a-v-b-a-r">
-            <span class="binge-list-browse-text04"><span>BingeList</span></span>
+      <div class="home-container">
+        <div class="home-binge-list-browse">
+          <div class="home-f-e-e-d"></div>
+          <a href="browse.html" class="home-navlink">
+            <svg viewBox="0 0 950.8571428571428 1024" class="home-icon">
+              <path
+                d="M658.286 475.429c0-141.143-114.857-256-256-256s-256 114.857-256 256 114.857 256 256 256 256-114.857 256-256zM950.857 950.857c0 40-33.143 73.143-73.143 73.143-19.429 0-38.286-8-51.429-21.714l-196-195.429c-66.857 46.286-146.857 70.857-228 70.857-222.286 0-402.286-180-402.286-402.286s180-402.286 402.286-402.286 402.286 180 402.286 402.286c0 81.143-24.571 161.143-70.857 228l196 196c13.143 13.143 21.143 32 21.143 51.429z"
+              ></path>
+            </svg>
+          </a>
+          <a href="{% url 'watchlist' %}" class="home-navlink1">
             <img
-              alt="MenuHamburgerLG1163"
-              src="public/playground_assets/menuhamburgerlg1163-bw4s.svg"
-              class="binge-list-browse-menu-hamburger-l-g"
+              alt="InterfaceHeart011154"
+              src="{% static 'assets/interfaceheart011154-0qn.svg' %}"
+              class="home-interface-heart01"
             />
+          </a>
+          <a href="{% url 'discover' %}" class="home-text"><span>Browse</span></a>
+          <a href="{% url 'watchlist' %}" class="home-text02">Watchlist</a>
+          <a href="{% url 'index' %}" class="home-text03">
+            <span>Home</span>
+            <br />
+          </a>
+          <div class="home-n-a-v-b-a-r">
+            <span class="home-text06"><span>BingeList</span></span>
+          </div>
+          <span class="home-text08"><span>BingeList</span></span>
+          <a href="index.html" class="home-navlink2">
+            <img
+              alt="homebutton211177"
+              src="{% static 'assets/homebutton211177-abk9-200h.png' %}"
+              class="home-homebutton21"
+            />
+          </a>
+          <img
+            type="image/png"
+            alt="Logo"
+            src="{% static 'assets/logo.png' %}"
+            class="home-untitled1"
+          />
+          <span class="home-text10">Home</span>
 <form action="{% url 'search_results' %}" method="get">
-            <input
-              name="query"
-              type="text"
-              placeholder="search..."
-              class="binge-list-browse-textinput input"
-            />
-
-</form>
-          </div>
-          <span class="binge-list-browse-text06"><span>BingeList</span></span>
-          <div class="binge-list-browse-f-e-e-d">
-            <span class="binge-list-browse-text08"><span>Home</span></span>
-            <div class="binge-list-browse-frame1"></div>
-            <img
-              alt="Line11167"
-              src="public/playground_assets/line11167-1ufu.svg"
-              class="binge-list-browse-line1"
-            />
-          </div>
-          <img
-            alt="homebutton211177"
-            src="public/playground_assets/homebutton211177-abk9-200h.png"
-            class="binge-list-browse-homebutton21"
+          <input
+            name="query"
+            type="text"
+            placeholder="search movies or tv shows..."
+            class="home-textinput input"
           />
-          <img
-            alt="Untitled11170"
-            src="public/playground_assets/untitled11170-nly8-200h.png"
-            class="binge-list-browse-untitled1"
-          />
-          <span class="binge-list-browse-text10">
-            <span>
-              BingeList: your favorite site to find, search, discover and keep
-              track of your favorite movies and tv shows.
-            </span>
-            <br />
-            <br />
-            <span>
-              Simply search for the movie/tv show you want and add it straight
-              into your watchlist.
-            </span>
-            <br />
-            <br />
-            <span>
-              Looking for new movies/tv shows to watch? Go to our “Browse” tab
-              to see trending movies and shows or to filter by your favorite
-              actors, genres, studios etc.
-            </span>
-          </span>
-          <span class="binge-list-browse-text18"><span>Home</span></span>
+          </form>
+          <span class="home-text11">Text</span>
         </div>
       </div>
     </div>
