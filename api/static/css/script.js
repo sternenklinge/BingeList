@@ -11,10 +11,7 @@ openModalButtons.forEach(button => {
 })
 
 overlay.addEventListener('click', () => {
-    const modals = document.querySelectorAll('.modal.active')
-    modals.forEach(modal => {
-        closeModal(modal)
-    })
+    closeAllModal()
 })
 
 closeModalButtons.forEach(button => {
@@ -45,5 +42,13 @@ function closeModal(modal) {
 
 function addToWatchlist(target) {
     if (target == null) return
-    
+    closeAllModal()
+    href="{% url 'add_to_watchlist' movie.id %}"
+}
+
+function closeAllModal() {
+    const modals = document.querySelectorAll('.modal.active')
+    modals.forEach(modal => {
+        closeModal(modal)
+    })
 }
