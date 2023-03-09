@@ -1,25 +1,59 @@
-.body {
+body {
     background-color: #003EB3;
 }
+#top {
+    position: fixed;
+    width: 100%;
+    height: 20%;
+    left: 0%;
+    top: 0%;
+    background-color: #112244;
+    z-index: 1;
+}
+#top #home {
+    text-align: left;
+}
+#top #scearch {
+    text-align: center;
+    top: 50%;
+}
+#top #scearch #title {
+    text-align: center;
+    color: whitesmoke;
+    font-weight: 800px;
+    font-size: 3em;
+}
+#main #results {
+    font-weight: 600px;
+    font-size: 2.5em;
+    color: whitesmoke;
+    text-align: center;
+}
 .container {
-    padding: 3em;
+    padding: 6em;
     display: grid;
     grid-gap: 2em;
-    grid-template-columns: repeat(auto-fit);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
   .container .tile {
-    width: 200px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, .1);
+    border: none;
+    padding: 0.5em;
+    border-radius: .5em;
     cursor: pointer;
+    background-color: rgba(255, 255, 255, 0);
+  }
+  .container .tile:hover {
+    background-color: rgba(255, 255, 255, .1);
   }
   .container .tile .coverart{
-    padding: 10px;
+    max-width: 100%;
   }
   .container .tile .title{
+    padding-top: 1em;
+    position: relative;
     font-size: 1.25rem;
     font-weight: bold;
+    color: whitesmoke;
   }
   .modal {
     position: fixed;
@@ -30,7 +64,7 @@
     border: 1px solid black;
     border-radius: 5px;
     z-index: 10;
-    background-color: #14A9FF;
+    background-color: #003EB3;
     width: 500px;
     max-width: 80%;
   }
@@ -88,6 +122,7 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, .5);
     pointer-events: none;
+    z-index: 2;
   }
   #overlay .active {
     opacity: 1;
