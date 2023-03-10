@@ -1,30 +1,109 @@
-<html>
-<body>
+<!DOCTYPE html>
+{% load static %}
+<html lang="english">
+  <head>
+    <title>WatchlistNew - exported project</title>
+    <meta property="og:title" content="WatchlistNew - exported project" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
 
-<h1>Watchlist</h1>
-<a href="{% url 'home' %}">Home</a>
-<a href="{% url 'delete_watchlist'%}">gesamte Watchlist löschen</a>
-{% if movies %}
-    <div class="row">
-      {% for movie in movies %}
-        <div class="column">
-          <h3>Titel: {{ movie.title }}</h3>
-          <p>Release Date: {{movie.release_date}}</p>
-          <p>Genres:
-          {% if movie.genres %}
-              {% for genre in movie.genres %}
-                  {{ genre.name }}
-              {% endfor %}
-          {% endif %}
-          </p>
-          <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
-          <p>Inhalt: {{movie.overview}}</p>
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <div>
+      <link href="{% static 'css/watchlist.css' %}" rel="stylesheet" />
+
+      <div class="watchlist-new-container">
+        <div class="watchlist-new-binge-list-browse">
+          <div class="watchlist-new-feed"></div>
+          <span class="watchlist-new-text">Text</span>
+          <div class="watchlist-new-navbar">
+            <span class="watchlist-new-text01">
+              <span class="watchlist-new-text02">Watchlist</span>
+              <br />
+            </span>
+            <form action="{% url 'results' %}" method="get">
+          <input
+            name="query"
+              type="text"
+              placeholder="search movies or tv shows..."
+              class="watchlist-new-textinput input"
+            />
+            </form>
+          </div>
+          <img
+            alt="Untitled11141"
+            src="{% static 'assets/untitled11141-gmcd-200h.png' %}"
+            class="watchlist-new-untitled1"
+          />
+          <div class="watchlist-new-resultscontainer"></div>
+          <a href="{% url 'browse' %}" class="watchlist-new-text04">Browse</a>
+          <a href="{% url 'watchlist' %}" class="watchlist-new-text05">
+            <span>Watchlist</span>
+          </a>
+          <a href="{% url 'home' %}" class="watchlist-new-text07">
+            <span>Home</span>
+            <br />
+          </a>
+          <a href="{% url 'home' %}" class="watchlist-new-navlink">
+            <img
+              alt="homebutton111129"
+              src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/36d2387b-08f0-4081-9385-0c42daf932a8/c4efb151-04f5-4c65-8b90-f6583052139a?org_if_sml=1276"
+              class="watchlist-new-homebutton11"
+            />
+          </a>
+          <a href="{% url 'browse' %}" class="watchlist-new-navlink1">
+            <svg
+              viewBox="0 0 950.8571428571428 1024"
+              class="watchlist-new-icon"
+            >
+              <path
+                d="M658.286 475.429c0-141.143-114.857-256-256-256s-256 114.857-256 256 114.857 256 256 256 256-114.857 256-256zM950.857 950.857c0 40-33.143 73.143-73.143 73.143-19.429 0-38.286-8-51.429-21.714l-196-195.429c-66.857 46.286-146.857 70.857-228 70.857-222.286 0-402.286-180-402.286-402.286s180-402.286 402.286-402.286 402.286 180 402.286 402.286c0 81.143-24.571 161.143-70.857 228l196 196c13.143 13.143 21.143 32 21.143 51.429z"
+              ></path>
+            </svg>
+          </a>
+          <a href="{% url 'watchlist' %}" class="watchlist-new-navlink2">
+            <img
+              alt="InterfaceHeart011186"
+              src="{% static 'assets/interfaceheart011186-rp9a.svg' %}"
+              class="watchlist-new-interface-heart01"
+            />
+          </a>
         </div>
-      {% endfor %}
+        <span class="watchlist-new-text10"><span>BingeList</span></span>
+      </div>
     </div>
-  {% else %}
-    <h3>Die Watchlist ist leer.</h3>
-  {% endif %}
-</body>
+  </body>
 </html>
-

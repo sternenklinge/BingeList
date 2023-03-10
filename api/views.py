@@ -11,22 +11,22 @@ def home(request):
 def search(request):
     return render(request, 'search.html')
 
-def search_results(request):
+def results(request):
     query = request.GET.get('query')
     search = tmdb.Search()
     response = search.movie(query=query, language='de')
     movies = search.results
     response = search.tv(query=query, language='de')
     tv_shows = search.results
-    return render(request, 'resultnew.html', {'movies': movies, 'tv_shows': tv_shows})
+    return render(request, 'results.html', {'movies': movies, 'tv_shows': tv_shows})
 
-def discover(request):
+def browse(request):
     discover = tmdb.Discover()
     response = discover.movie(language='de',sort_by='popularity.desc')
     movies = discover.results
     response = discover.tv(language='de',sort_by='popularity.desc')
     tv_shows = discover.results
-    return render(request, 'discover.html', {'movies': movies, 'tv_shows': tv_shows})
+    return render(request, 'browse.html', {'movies': movies, 'tv_shows': tv_shows})
 
 def add_to_watchlist(request, id):
     movie = tmdb.Movies(id)
@@ -47,5 +47,5 @@ def delete_watchlist(request):
     watchlist = Watchlist.objects.all().delete()
     return HttpResponse('Alle Elemente aus der watchlist wurden entfernt')
 
-def index(request):
-    return render(request, 'index.html')
+def home(request):
+    return render(request, 'home.html')
