@@ -132,6 +132,22 @@
   background-color: transparent;
 }
 .results-text07 {
+  top: 0px;
+  left: 973px;
+  color: rgb(255, 255, 255);
+  height: auto;
+  position: absolute;
+  font-size: 68px;
+  align-self: stretch;
+  font-style: Bold;
+  text-align: left;
+  font-family: Poppins;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.results-text10 {
   top: 14px;
   color: rgba(255, 255, 255, 1);
   height: auto;
@@ -174,11 +190,19 @@
   position: absolute;
   border-color: transparent;
 }
-.results-text09 {
+.results-text12 {
   color: rgb(17, 34, 68);
   width: 229px;
   height: 1080px;
   background-color: rgb(17, 34, 68);
+}
+.results-resultscontainer {
+  flex: 0 0 auto;
+  width: 100%;
+  border: 2px dashed rgba(120, 120, 120, 0.4);
+  height: 100px;
+  display: flex;
+  align-items: flex-start;
 }
 .results-navlink2 {
   display: contents;
@@ -192,35 +216,58 @@
   position: absolute;
   text-decoration: none;
 }
-.results-text10 {
-  top: 0px;
-  left: 973px;
-  color: rgb(255, 255, 255);
-  height: auto;
-  position: absolute;
-  font-size: 68px;
-  align-self: stretch;
-  font-style: Bold;
-  text-align: left;
-  font-family: Poppins;
-  font-weight: 700;
-  line-height: normal;
-  font-stretch: normal;
-  text-decoration: none;
-}
 @media(max-width: 1600px) {
   .results-binge-list-browse {
     border-radius: 0px;
   }
-  .results-text10 {
+  .results-navbar {
     top: 0px;
-    left: 811px;
-    margin: auto;
+    left: 0px;
+    width: 1549px;
+    height: 114px;
+    border-color: transparent;
+    background-color: #112244;
   }
-  .results-text11 {
+  .results-text07 {
+    top: 0px;
+    left: 802px;
+    color: rgb(255, 255, 255);
+    right: 112px;
+    height: auto;
+    margin: auto;
+    font-size: 68px;
+    font-family: Poppins;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
+  }
+  .results-text08 {
     top: 182px;
     left: 811px;
     margin: auto;
+  }
+  .results-text10 {
+    top: 29px;
+    left: 70px;
+  }
+  .results-textinput {
+    top: 37px;
+    left: 258px;
+    color: var(--dl-color-gray-black);
+    height: 34px;
+    background-color: #28457F;
+  }
+  .results-text12 {
+    color: rgb(17, 34, 68);
+    background-color: rgb(17, 34, 68);
+  }
+  .results-resultscontainer {
+    right: 0px;
+    width: 1320px;
+    bottom: 0px;
+    height: 970px;
+    position: absolute;
+    margin-right: 0px;
   }
 }
 @media(max-width: 1200px) {
