@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BingeList</title>
+
+        {% load static %}
+        <link rel="stylesheet" href="../static/css/resultsnew.css">
+        <script src="{% static 'js/script.js' %}"></script>
+
+    </head>
+
+    <body>
+
+        <div id="navbar">
+            <button id="logo">
+                <img
+                    alt="Untitled11141"
+                    src="public/playground_assets/untitled11141-gmcd-200h.png"
+                    id="logopic"
+                />
+                <span id="logotitle">
+                    BingeList
+                </span>
+            </button>
+            <div id="scearch">
+                <form 
+                    action="{% url 'search_results' %}" 
+                    method="get"
+                    id="scearchbar"
+                >
+                    <input 
+                        type="text" 
+                        name="query" 
+                        placeholder="scearch..."
+                    />
+                    <button type="submit" id="scearchbutton">
+                        <img
+                        alt="InterfaceHeart011121"
+                        src="public/playground_assets/interfaceheart011121-kl7.svg"
+                        />
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="sidebar">
+
+            <div class="buttons">
+
+                <button class="button" id="home" onclick="window.location.href = 'index.html';">
+                    <img
+                        alt="homebutton111129"
+                        src="public/playground_assets/homebutton111129-7n9a-200h.png"
+                        class="picture"
+                    />
+                    <span class="title">
+                        Home
+                    </span>
+                </button>
+
+                <button class="button" id="browse" onclick="window.location.href = 'browse.html';">
+                    <svg 
+                        viewBox="0 0 950.8571428571428 1024" 
+                        class="picture"
+                    >
+                        <path
+                        d="M658.286 475.429c0-141.143-114.857-256-256-256s-256 114.857-256 256 114.857 256 256 256 256-114.857 256-256zM950.857 950.857c0 40-33.143 73.143-73.143 73.143-19.429 0-38.286-8-51.429-21.714l-196-195.429c-66.857 46.286-146.857 70.857-228 70.857-222.286 0-402.286-180-402.286-402.286s180-402.286 402.286-402.286 402.286 180 402.286 402.286c0 81.143-24.571 161.143-70.857 228l196 196c13.143 13.143 21.143 32 21.143 51.429z"
+                        ></path>
+                    </svg>
+                    <span class="title">
+                        Browse
+                    </span>
+                </button>
+
+                <button class="button" id="watchlist" onclick="window.location.href = 'watchlist.html';">
+                    <img
+                        alt="InterfaceHeart011121"
+                        src="public/playground_assets/interfaceheart011121-kl7.svg"
+                        class="picture"
+                    />
+                    <span class="title">
+                        Watchlist
+                    </span>
+                </button>
+
+            </div>
+
+        </div>
+
+        
+        <div class="container">
+            {% if movies or tv_shows %}
+                {% for movie in movies %}
+                <button data-modal-target="#{{ movie.id }}" class="tile">
+                    <img class="coverart" src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
+                    <div class="title">{{ movie.title }}</div>
+                </button>
+                {% endfor %}
+                {% for tv_show in tv_shows %}
+                <button data-modal-target="#{{ tv_show.id }}" class="tile">
+                    <img class="coverart" src="https://image.tmdb.org/t/p/w500/{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
+                    <div class="title">{{ tv_show.title }}</div>
+                </button>
+                {% endfor %}
+            {% else %}
+                <div id="noresults">Nothing found!</div>
+            {% endif %}
+        </div>
+
+        {% for movie in movies %}
+            <div class="modal" id="{{ movie.id }}">
+                <div class="modal-header">
+                    <div class="title">{{ movie.title }}</div>
+                    <button data-close-button class="close-button">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="coverart">
+                        <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
+                    </div>
+                    <div class="overview">
+                        {{movie.overview}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="date">
+                        Release Date: {{movie.release_date}}
+                    </div>
+                    <div class="genres">
+                        Genres:
+                        {% if movie.genres %}
+                            {% for genre in movie.genres %}
+                                {{ genre.name }}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <button data-add-target="#{{ movie.id }}" class="add-button">Add to Watchlist</button>
+                </div>
+            </div>
+        {% endfor %}
+        {% for tv_show in tv_shows %}
+            <div class="modal" id="{{ tv_show.id }}">
+                <div class="modal-header">
+                    <div class="title">{{ tv_show.title }}</div>
+                    <button data-close-button class="close-button">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="coverart">
+                        <img src="https://image.tmdb.org/t/p/w500/{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
+                    </div>
+                    <div class="overview">
+                        {{tv_show.overview}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="date">
+                        Release Date: {{tv_show.release_date}}
+                    </div>
+                    <div class="genres">
+                        Genres:
+                        {% if tv_show.genres %}
+                            {% for genre in tv_show.genres %}
+                                {{ genre.name }}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <button data-add-target="#{{ tv_show.id }}" class="add-button">Add to Watchlist</button>
+                </div>
+            </div>
+        {% endfor %}
+    
+        <div id="overlay"></div>
+
+    </body>
+
+</html>
