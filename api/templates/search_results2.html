@@ -1,0 +1,108 @@
+<html>
+<head>
+  {% load static %}
+  <link rel="stylesheet" href="../static/css/results_style.css">
+  <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+
+  <header>
+    <div id="top">
+      <button id="home">Home</button>
+      <div id="scearch">
+        <div id="title">Suche</div>
+        <div id="scearchbar">
+          <form action="{% url 'search_results' %}" method="get">
+            <input type="text" name="query" placeholder="Suchen...">
+            <button type="submit">Suchen</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <a id="results">Gefunde Ergebnisse</a>
+  {% if movies or tv_shows %}
+    <div class="container">
+      {% for movie in movies %}
+      <button data-modal-target="#{{ movie.id }}" class="tile">
+          <img class="coverart" src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
+        <div class="title">{{ movie.title }}</div>
+      </button>
+      {% endfor %}
+      {% for tv_show in tv_shows %}
+      <button data-modal-target="#{{ tv_show.id }}" class="tile">
+          <img class="coverart" src="https://image.tmdb.org/t/p/w500/{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
+        <div class="title">{{ tv_show.title }}</div>
+      </button>
+      {% endfor %}
+    </div>
+
+    <div id="overlay"></div>
+
+    {% for movie in movies %}
+      <div class="modal" id="{{ movie.id }}">
+        <div class="modal-header">
+          <div class="title">{{ movie.title }}</div>
+          <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="coverart">
+            <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
+          </div>
+          <div class="overview">
+            {{movie.overview}}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="date">
+            Release Date: {{movie.release_date}}
+          </div>
+          <div class="genres">
+            Genres:
+            {% if movie.genres %}
+                {% for genre in movie.genres %}
+                    {{ genre.name }}
+                {% endfor %}
+            {% endif %}
+          </div>
+          <button data-add-target="#{{ movie.id }}" class="add-button">Add to Watchlist</button>
+        </div>
+      </div>
+    {% endfor %}
+    {% for tv_show in tv_shows %}
+      <div class="modal" id="{{ tv_show.id }}">
+        <div class="modal-header">
+          <div class="title">{{ tv_show.title }}</div>
+          <button data-close-button class="close-button">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="coverart">
+            <img src="https://image.tmdb.org/t/p/w500/{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
+          </div>
+          <div class="overview">
+            {{tv_show.overview}}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="date">
+            Release Date: {{tv_show.release_date}}
+          </div>
+          <div class="genres">
+            Genres:
+            {% if tv_show.genres %}
+                {% for genre in tv_show.genres %}
+                    {{ genre.name }}
+                {% endfor %}
+            {% endif %}
+          </div>
+          <button data-add-target="#{{ tv_show.id }}" class="add-button">Add to Watchlist</button>
+        </div>
+      </div>
+  {% endfor %}
+  {% else %}
+    <h3>Keine Ergebnisse gefunden.</h3>
+  {% endif %}
+
+</body>
+</html>
