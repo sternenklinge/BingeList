@@ -18,7 +18,7 @@ def search_results(request):
     movies = search.results
     response = search.tv(query=query, language='de')
     tv_shows = search.results
-    return render(request, 'search_results.html', {'movies': movies, 'tv_shows': tv_shows})
+    return render(request, 'resultnew.html', {'movies': movies, 'tv_shows': tv_shows})
 
 def discover(request):
     discover = tmdb.Discover()
