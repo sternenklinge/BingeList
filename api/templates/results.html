@@ -40,6 +40,7 @@
       data-tag="font"
     />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="{% static 'js/script.js' %}"></script>
   </head>
   <body>
     <div>
@@ -68,7 +69,26 @@
             src="{% static 'assets/untitled11141-gmcd-200h.png' %}"
             class="results-untitled1"
           />
-          <div class="results-resultscontainer"></div>
+          <div class="results-resultscontainer">
+            <div class="container">
+            {% if movies or tv_shows %}
+                {% for movie in movies %}
+                <button data-modal-target="z{{ movie.id }}" class="tile">
+                    <img class="coverart" src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
+                    <div class="title">{{ movie.title }}</div>
+                </button>
+                {% endfor %}
+                {% for tv_show in tv_shows %}
+                <button data-modal-target="z{{ tv_show.id }}" class="tile">
+                    <img class="coverart" src="https://image.tmdb.org/t/p/w500/{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
+                    <div class="title">{{ tv_show.title }}</div>
+                </button>
+                {% endfor %}
+            {% else %}
+                <div id="noresults">Nothing found!</div>
+            {% endif %}
+            </div>
+          </div>
           <a href="{% url 'browse' %}" class="results-text04">Browse</a>
           <a href="{% url 'watchlist' %}" class="results-text05">
             <span>Watchlist</span>
@@ -103,27 +123,8 @@
       </div>
     </div>
 
-<div class="container">
-            {% if movies or tv_shows %}
-                {% for movie in movies %}
-                <button data-modal-target="#{{ movie.id }}" class="tile">
-                    <img class="coverart" src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
-                    <div class="title">{{ movie.title }}</div>
-                </button>
-                {% endfor %}
-                {% for tv_show in tv_shows %}
-                <button data-modal-target="#{{ tv_show.id }}" class="tile">
-                    <img class="coverart" src="https://image.tmdb.org/t/p/w500/{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
-                    <div class="title">{{ tv_show.title }}</div>
-                </button>
-                {% endfor %}
-            {% else %}
-                <div id="noresults">Nothing found!</div>
-            {% endif %}
-        </div>
-
         {% for movie in movies %}
-            <div class="modal" id="{{ movie.id }}">
+            <div class="modal" id="z{{ movie.id }}">
                 <div class="modal-header">
                     <div class="title">{{ movie.title }}</div>
                     <button data-close-button class="close-button">&times;</button>
@@ -140,20 +141,20 @@
                     <div class="date">
                         Release Date: {{movie.release_date}}
                     </div>
-                    <div class="genres">
+                    <!-- <div class="genres">
                         Genres:
                         {% if movie.genres %}
                             {% for genre in movie.genres %}
                                 {{ genre.name }}
                             {% endfor %}
                         {% endif %}
-                    </div>
-                    <button data-add-target="#{{ movie.id }}" class="add-button">Add to Watchlist</button>
+                    </div> -->
+                    <button data-add-target="z{{ movie.id }}" class="add-button">Add to Watchlist</button>
                 </div>
             </div>
         {% endfor %}
         {% for tv_show in tv_shows %}
-            <div class="modal" id="{{ tv_show.id }}">
+            <div class="modal" id="z{{ tv_show.id }}">
                 <div class="modal-header">
                     <div class="title">{{ tv_show.title }}</div>
                     <button data-close-button class="close-button">&times;</button>
@@ -170,20 +171,20 @@
                     <div class="date">
                         Release Date: {{tv_show.release_date}}
                     </div>
-                    <div class="genres">
+                    <!-- <div class="genres">
                         Genres:
                         {% if tv_show.genres %}
                             {% for genre in tv_show.genres %}
                                 {{ genre.name }}
                             {% endfor %}
                         {% endif %}
-                    </div>
-                    <button data-add-target="#{{ tv_show.id }}" class="add-button">Add to Watchlist</button>
+                    </div> -->
+                    <button data-add-target="z{{ tv_show.id }}" class="add-button">Add to Watchlist</button>
                 </div>
             </div>
         {% endfor %}
 
-        <div id="overlay"></div>
+        <div class="overlay" id="overlay"></div>
 
   </body>
 </html>

@@ -6,7 +6,7 @@ window.onload=function(){
 
     openModalButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const modal = document.querySelector(button.dataset.modalTarget)
+            const modal = document.getElementById(button.dataset.modalTarget)
             openModal(modal)
         })
     })
