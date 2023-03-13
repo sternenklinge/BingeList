@@ -1,17 +1,18 @@
 .results-container {
   width: 100%;
   display: flex;
-  overflow: auto;
+  overflow: hidden;
   min-height: 100vh;
   align-items: flex-start;
   flex-direction: column;
   justify-content: flex-start;
+
 }
 .results-binge-list-browse {
   width: 100%;
   height: 100%;
   display: flex;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
   align-items: flex-start;
   flex-shrink: 0;
@@ -42,6 +43,7 @@
   flex-direction: row;
   justify-content: flex-start;
   background-color: transparent;
+  overflow: hidden;
 }
 .results-text {
   top: 0px;
@@ -234,7 +236,8 @@
   font-stretch: normal;
   text-decoration: none;
 }
-@media(max-width: 1600px) {
+
+@media(max-width: 1920px) {
   .results-binge-list-browse {
     border-radius: 0px;
   }
@@ -322,7 +325,7 @@
   position: relative;
   font-size: 1.25rem;
   font-weight: bold;
-  color: whitesmoke;
+  color: rgba(255, 255, 255, .1);
 }
 .modal {
   position: fixed;
