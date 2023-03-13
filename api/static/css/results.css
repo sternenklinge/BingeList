@@ -295,9 +295,10 @@
 }
 .container {
   height: 90%;
-  width: 80%;
+  max-width: 100%;
   top: 10%;
   left: 280px;
+  padding: 2em;
   background-color: transparent;
   display: grid;
   grid-gap: 2em;
@@ -330,7 +331,7 @@
   transform: translate(-50%, -50%) scale(0);
   transition: 200ms ease-in-out;
   border: 3px solid black;
-  border-radius: 5px;
+  border-radius: 10px;
   z-index: 10;
   background-color: rgba(40, 69, 127, 1);
   min-width: 600px;
