@@ -6,19 +6,24 @@ tmdb.API_KEY = '300659883e7e07b8afd0aec7dbf8e802'
 tmdb.REQUESTS_TIMEOUT = 10
 
 def home(request):
-    return render(request, 'home.html')
-
-def search(request):
-    return render(request, 'search.html')
+    return render(request, 'newhome.html')
 
 def results(request):
     query = request.GET.get('query')
-    search = tmdb.Search()
-    response = search.movie(query=query, language='de')
-    movies = search.results
-    response = search.tv(query=query, language='de')
-    tv_shows = search.results
-    return render(request, 'results.html', {'movies': movies, 'tv_shows': tv_shows})
+    referer_url = request.META.get('HTTP_REFERER')
+    if query:
+        search = tmdb.Search()
+        response = search.movie(query=query, language='de')
+        movies = search.results
+        response = search.tv(query=query, language='de')
+        tv_shows = search.results
+        return render(request, 'results.html', {'movies': movies, 'tv_shows': tv_shows})
+    else:
+        if referer_url:
+            return redirect(referer_url)
+        else:
+            return redirect('home')
+
 
 def browse(request):
     discover = tmdb.Discover()
@@ -47,5 +52,3 @@ def delete_watchlist(request):
     watchlist = Watchlist.objects.all().delete()
     return HttpResponse('Alle Elemente aus der watchlist wurden entfernt')
 
-def home(request):
-    return render(request, 'home.html')
