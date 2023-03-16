@@ -201,20 +201,14 @@
             <div class="modal-footer bg-primary justify-content-between">
                 <p id="modalReleaseDate" class="ms-3"></p>
                 <div>
-                    <button
-                            type="button"
-                            class="btn btn-danger me-2"
-                            data-bs-dismiss="modal"
-                    >
+                    <form method="POST" action="">
+                    {% csrf_token %}
+                    <button type="button" class="btn btn-danger me-2" data-bs-dismiss="modal">
                         Close
                     </button>
-                    <button
-                            type="button"
-                            class="btn btn-success"
-                            id="addToWatchlistBtn"
-                    >
-                        Add to Watchlist
-                    </button>
+                    <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                    <button type="submit" class="btn btn-primary">Add to Watchlist</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -237,14 +231,11 @@
                 $("#modalImage").attr("src", imageSrc);
                 $("#addToWatchlistBtn").attr("data-type", type);
                 $("#addToWatchlistBtn").attr("data-title", title);
+                $("#addToWatchlistBtn").attr("data-description", description);
+                $("#addToWatchlistBtn").attr("data-release-date", releaseDate);
+                $("#addToWatchlistBtn").attr("data-image-url", imageSrc);
 
                 $("#movieModal").modal("show");
-            });
-
-            $("#addToWatchlistBtn").click(function () {
-                var type = $(this).data("type");
-                var title = $(this).data("title");
-                alert("Added " + title + " (" + type + ") to watchlist");
             });
         });
     </script>

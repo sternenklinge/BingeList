@@ -4,4 +4,4 @@ from django.db import models
 class Watchlist(models.Model):
     movie_id = models.IntegerField()
 #   overview = models.TextField()
-#
+

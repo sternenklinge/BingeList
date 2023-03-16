@@ -9,5 +9,5 @@ urlpatterns = [
     path('watchlist/', views.watchlist, name='watchlist'),
     path('results/', views.results, name='results'),
     path('watchlist/add/<int:id>/', views.add_to_watchlist, name='add_to_watchlist'),
-    path('delete_watchlist/', views.delete_watchlist, name='delete_watchlist'),
+    path('add_to_watchlist/', views.add_to_watchlist, name='add_to_watchlist'),
     ]

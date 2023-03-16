@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
+from django.http import JsonResponse
 import tmdbsimple as tmdb
 from .models import Watchlist
 
@@ -35,11 +36,11 @@ def results(request):
             return redirect('home')
 
 
-def add_to_watchlist(request, id):
-    movie = tmdb.Movies(id)
-    response = movie.info()
-    Watchlist.objects.create(movie_id=id)
-    return HttpResponse("Der Film wurde erfolgreich zur Watchlist hinzugefügt.")
+def add_to_watchlist(request):
+    if request.method == 'POST':
+        movie_id = request.POST.get('movie_id')
+        Watchlist.objects.create(movie_id=movie_id)
+        return redirect('browse')
 
 
 def watchlist(request):
@@ -55,3 +56,6 @@ def watchlist(request):
 def delete_watchlist(request):
     watchlist = Watchlist.objects.all().delete()
     return HttpResponse('Alle Elemente aus der watchlist wurden entfernt')
+
+
+
