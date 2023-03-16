@@ -48,31 +48,31 @@
           </div>
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-start">
-              <li class="nav-item">
-                <a
-                  class="nav-link nav-fill nav-active bg-secondary text-start text-white text-center"
-                  aria-current="page"
-                  href="{% url 'home' %}"
-                  >Home</a
-                >
+              <li class="nav-item text-start text-white text-center">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
               </li>
               <li class="nav-item text-start text-white text-center">
                 <a class="nav-link" href="{% url 'browse' %}">Browse</a>
               </li>
-              <li class="nav-item text-start text-white text-center">
-                <a class="nav-link" href="{% url 'watchlist' %}">Watchlist</a>
+              <li class="nav-item">
+                <a
+                  class="nav-link nav-fill nav-active bg-secondary text-start text-white text-center"
+                  aria-current="page"
+                  href="{% url 'watchlist' %}"
+                  >Watchlist</a
+                >
               </li>
             </ul>
           </div>
         </div>
 
         <div class="d-flex justify-content-center align-items-center">
-          <a class="navbar-brand fs-1 text-start" href="{% url 'home' %}"
-            >Home</a
+          <a class="navbar-brand fs-1" href="{% url 'watchlist' %}"
+            >Watchlist</a
           >
         </div>
 
-         <div class="d-flex justify-content-end align-items-center">
+        <div class="d-flex justify-content-end align-items-center">
           <form class="d-flex" action="{% url 'results' %}" method="get">
             <input
               name="query"
@@ -127,24 +127,89 @@
       </div>
     </nav>
 
-    <div class="d-flex position-absolute top-50 start-50 translate-middle">
-      <form
-        class="d-flex mt-3"
-        role="search"
-        action="{% url 'results' %}"
-        method="get"
-      >
-        <input
-          name="query"
-          class="form-control form-control-lg me-2 bg-primary text-white border-0"
-          type="search"
-          placeholder="search for movies and tv-shows"
-          aria-label="Search"
-        />
-        <button class="btn-lg btn-success border-0" type="submit">
-          Search
-        </button>
-      </form>
+<div class="container-fluid">
+  <div class="row">
+    {% for movie in movies %}
+      <div class="col-md-2 pt-3">
+        <div class="card" id="movie{{ movie.id }}" data-type="movie" data-title="{{ movie.title }}" data-description="{{ movie.overview }}" data-release-date="{{ movie.release_date }}">
+          <h5 class="card-header fs-6 bg-primary">{{ movie.title }}</h5>
+          <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
+        </div>
+      </div>
+    {% endfor %}
+    {% for tv_show in tv_shows %}
+      <div class="col-md-2 pt-3">
+        <div class="card" id="tv{{ tv_show.id }}" data-type="tv" data-title="{{ tv_show.name }}" data-description="{{ tv_show.overview }}" data-release-date="{{ tv_show.first_air_date }}">
+          <h5 class="card-header fs-6 bg-primary">{{ tv_show.name }}</h5>
+          <img src="https://image.tmdb.org/t/p/w500/{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title" id="movieModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body bg-secondary" >
+  <div class="row">
+    <div class="col-md-4">
+      <img src="" alt="" id="modalImage" style="width: 300px;">
     </div>
+    <div class="col-md-8">
+      <h4 id="modalTitle"></h4>
+      <p id="modalDescription"></p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer bg-primary justify-content-between">
+        <p id="modalReleaseDate" class="ms-3"></p>
+        <div>
+          <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="addToWatchlistBtn">Add to Watchlist</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $('.card').click(function() {
+      var type = $(this).data('type');
+      var title = $(this).data('title');
+      var description = $(this).data('description');
+      var releaseDate = $(this).data('release-date');
+      var imageSrc = $(this).find('img').attr('src');
+
+      $('#movieModalLabel').text(title);
+      $('#modalDescription').text(description);
+      $('#modalReleaseDate').text('Release date: ' + releaseDate);
+      $('#modalImage').attr('src', imageSrc);
+      $('#addToWatchlistBtn').attr('data-type', type);
+      $('#addToWatchlistBtn').attr('data-title', title);
+
+      $('#movieModal').modal('show');
+    });
+
+    $('#addToWatchlistBtn').click(function() {
+      var type = $(this).data('type');
+      var title = $(this).data('title');
+      alert('Added ' + title + ' (' + type + ') to watchlist');
+    });
+  });
+</script>
+
+
+
+
+
+
   </body>
 </html>

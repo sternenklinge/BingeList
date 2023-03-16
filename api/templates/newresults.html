@@ -1,6 +1,4 @@
-{% load static %}
-{% load bootstrap5 %}
-{% bootstrap_css %}
+{% load static %} {% load bootstrap5 %} {% bootstrap_css %}
 {% bootstrap_javascript %}
 <!DOCTYPE html>
 <html lang="en">
@@ -54,13 +52,8 @@
                     <li class="nav-item text-start text-white text-center">
                         <a class="nav-link" href="{% url 'home' %}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a
-                                class="nav-link nav-fill nav-active bg-secondary text-start text-white text-center"
-                                aria-current="page"
-                                href="{% url 'browse' %}"
-                        >Browse</a
-                        >
+                    <li class="nav-item text-start text-white text-center">
+                        <a class="nav-link" href="{% url 'browse' %}">Browse</a>
                     </li>
                     <li class="nav-item text-start text-white text-center">
                         <a class="nav-link" href="{% url 'watchlist' %}">Watchlist</a>
@@ -70,20 +63,20 @@
         </div>
 
         <div class="d-flex justify-content-center align-items-center">
-            <a class="navbar-brand fs-1" href="{% url 'browse' %}">Browse</a>
+            <a class="navbar-brand fs-1" href="">Results</a>
         </div>
 
         <div class="d-flex justify-content-end align-items-center">
             <form class="d-flex" action="{% url 'results' %}" method="get">
                 <input
                         name="query"
-                        class="form-control me-2 bg-secondary text-white"
+                        class="form-control me-2 bg-secondary text-light"
                         type="search"
                         placeholder="Search"
                         aria-label="Search"
                 />
                 <button
-                        class="btn btn-outline-light align-self-center"
+                        class="btn btn-outline-success align-self-center"
                         type="submit"
                 >
                     Search
@@ -132,68 +125,40 @@
     <div class="row">
         {% for movie in movies %}
             <div class="col-md-2 pt-3">
-                <div
-                        class="card border-primary"
-                        id="movie{{ movie.id }}"
-                        data-type="movie"
-                        data-title="{{ movie.title }}"
-                        data-description="{{ movie.overview }}"
-                        data-release-date="{{ movie.release_date }}"
-                >
+                <div class="card" id="movie{{ movie.id }}" data-type="movie" data-title="{{ movie.title }}"
+                     data-description="{{ movie.overview }}" data-release-date="{{ movie.release_date }}">
                     <h5 class="card-header fs-6 bg-primary">{{ movie.title }}</h5>
-                    <img
-                            src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}"
-                            alt="{{ movie.title }}"
-                    />
+                    <img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="{{ movie.title }}">
                 </div>
             </div>
-        {% endfor %} {% for tv_show in tv_shows %}
-        <div class="col-md-2 pt-3">
-            <div
-                    class="card"
-                    id="tv{{ tv_show.id }}"
-                    data-type="tv"
-                    data-title="{{ tv_show.name }}"
-                    data-description="{{ tv_show.overview }}"
-                    data-release-date="{{ tv_show.first_air_date }}"
-            >
-                <h5 class="card-header fs-6 bg-primary">{{ tv_show.name }}</h5>
-                <img
-                        src="https://image.tmdb.org/t/p/w500/{{ tv_show.poster_path }}"
-                        alt="{{ tv_show.title }}"
-                />
+        {% endfor %}
+        {% for tv_show in tv_shows %}
+            <div class="col-md-2 pt-3">
+                <div class="card" id="tv{{ tv_show.id }}" data-type="tv" data-title="{{ tv_show.name }}"
+                     data-description="{{ tv_show.overview }}" data-release-date="{{ tv_show.first_air_date }}">
+                    <h5 class="card-header fs-6 bg-primary">{{ tv_show.name }}</h5>
+                    <img src="https://image.tmdb.org/t/p/w500/{{ tv_show.poster_path }}" alt="{{ tv_show.title }}">
+                </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
     </div>
 </div>
 
 <!-- Modal -->
-<div
-        class="modal fade"
-        id="movieModal"
-        tabindex="-1"
-        aria-labelledby="movieModalLabel"
-        aria-hidden="true"
->
+<div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header bg-primary">
                 <h5 class="modal-title" id="movieModalLabel"></h5>
-                <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                ></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body bg-secondary">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="" alt="" id="modalImage" style="width: 300px"/>
+                        <img src="" alt="" id="modalImage" style="width: 300px;">
                     </div>
                     <div class="col-md-8">
-                        <h2 id="modalTitle"></h2>
+                        <h4 id="modalTitle"></h4>
                         <p id="modalDescription"></p>
                     </div>
                 </div>
@@ -201,20 +166,8 @@
             <div class="modal-footer bg-primary justify-content-between">
                 <p id="modalReleaseDate" class="ms-3"></p>
                 <div>
-                    <button
-                            type="button"
-                            class="btn btn-danger me-2"
-                            data-bs-dismiss="modal"
-                    >
-                        Close
-                    </button>
-                    <button
-                            type="button"
-                            class="btn btn-success"
-                            id="addToWatchlistBtn"
-                    >
-                        Add to Watchlist
-                    </button>
+                    <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="addToWatchlistBtn">Add to Watchlist</button>
                 </div>
             </div>
         </div>
@@ -224,30 +177,31 @@
 
     <script>
         $(document).ready(function () {
-            $(".card").click(function () {
-                var type = $(this).data("type");
-                var title = $(this).data("title");
-                var description = $(this).data("description");
-                var releaseDate = $(this).data("release-date");
-                var imageSrc = $(this).find("img").attr("src");
+            $('.card').click(function () {
+                var type = $(this).data('type');
+                var title = $(this).data('title');
+                var description = $(this).data('description');
+                var releaseDate = $(this).data('release-date');
+                var imageSrc = $(this).find('img').attr('src');
 
-                $("#movieModalLabel").text(title);
-                $("#modalDescription").text(description);
-                $("#modalReleaseDate").text("Release date: " + releaseDate);
-                $("#modalImage").attr("src", imageSrc);
-                $("#addToWatchlistBtn").attr("data-type", type);
-                $("#addToWatchlistBtn").attr("data-title", title);
+                $('#movieModalLabel').text(title);
+                $('#modalDescription').text(description);
+                $('#modalReleaseDate').text('Release date: ' + releaseDate);
+                $('#modalImage').attr('src', imageSrc);
+                $('#addToWatchlistBtn').attr('data-type', type);
+                $('#addToWatchlistBtn').attr('data-title', title);
 
-                $("#movieModal").modal("show");
+                $('#movieModal').modal('show');
             });
 
-            $("#addToWatchlistBtn").click(function () {
-                var type = $(this).data("type");
-                var title = $(this).data("title");
-                alert("Added " + title + " (" + type + ") to watchlist");
+            $('#addToWatchlistBtn').click(function () {
+                var type = $(this).data('type');
+                var title = $(this).data('title');
+                alert('Added ' + title + ' to watchlist');
             });
         });
     </script>
-</div>
+
+
 </body>
 </html>

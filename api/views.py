@@ -6,7 +6,17 @@ tmdb.API_KEY = '300659883e7e07b8afd0aec7dbf8e802'
 tmdb.REQUESTS_TIMEOUT = 10
 
 def home(request):
-    return render(request, 'newhome.html')
+    return render(request, 'home.html')
+
+
+def browse(request):
+    discover = tmdb.Discover()
+    response = discover.movie(language='de', sort_by='popularity.desc')
+    movies = discover.results
+    response = discover.tv(language='de', sort_by='popularity.desc')
+    tv_shows = discover.results
+    return render(request, 'browse.html', {'movies': movies, 'tv_shows': tv_shows})
+
 
 def results(request):
     query = request.GET.get('query')
@@ -17,7 +27,7 @@ def results(request):
         movies = search.results
         response = search.tv(query=query, language='de')
         tv_shows = search.results
-        return render(request, 'results.html', {'movies': movies, 'tv_shows': tv_shows})
+        return render(request, 'newresults.html', {'movies': movies, 'tv_shows': tv_shows})
     else:
         if referer_url:
             return redirect(referer_url)
@@ -25,19 +35,12 @@ def results(request):
             return redirect('home')
 
 
-def browse(request):
-    discover = tmdb.Discover()
-    response = discover.movie(language='de',sort_by='popularity.desc')
-    movies = discover.results
-    response = discover.tv(language='de',sort_by='popularity.desc')
-    tv_shows = discover.results
-    return render(request, 'browse.html', {'movies': movies, 'tv_shows': tv_shows})
-
 def add_to_watchlist(request, id):
     movie = tmdb.Movies(id)
     response = movie.info()
     Watchlist.objects.create(movie_id=id)
     return HttpResponse("Der Film wurde erfolgreich zur Watchlist hinzugefügt.")
+
 
 def watchlist(request):
     watchlist = Watchlist.objects.all()
@@ -46,9 +49,9 @@ def watchlist(request):
         movie = tmdb.Movies(item.movie_id)
         response = movie.info()
         movies.append(movie)
-    return render(request, 'watchlist.html', {'movies': movies})
+    return render(request, 'newwatchlist.html', {'movies': movies})
+
 
 def delete_watchlist(request):
     watchlist = Watchlist.objects.all().delete()
     return HttpResponse('Alle Elemente aus der watchlist wurden entfernt')
-
