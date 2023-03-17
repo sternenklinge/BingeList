@@ -36,6 +36,7 @@ def results(request):
             return redirect('home')
 
 
+@app.route('/add_to_watchlist')
 def add_to_watchlist(request):
     if request.method == 'POST':
         movie_id = request.POST.get('movie_id')
